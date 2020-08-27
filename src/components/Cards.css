@@ -1,0 +1,11 @@
+.cards-container {
+  width: 90%;
+  margin: auto;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+}
+
+.card-grid {
+  text-align: center;
+}
