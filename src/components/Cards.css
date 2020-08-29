@@ -1,11 +1,54 @@
 .cards-container {
-  width: 90%;
+  width: 70%;
   margin: auto;
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .card-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 25px;
+  height: 250px;
   text-align: center;
+}
+
+#cost {
+  background: rgba(127, 140, 141, 1);
+}
+
+#left {
+  background: rgba(155, 89, 182, 1);
+}
+
+#days-left {
+  background: rgba(26, 188, 156, 1);
+}
+
+.card-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-text h1 {
+  padding: 5px;
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+
+.card-text h3 {
+  padding: 5px;
+  font-size: 1.5rem;
+  font-weight: 450;
+}
+
+@media screen and (max-width: 800px) {
+  .cards-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

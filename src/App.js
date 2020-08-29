@@ -1,102 +1,59 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Cards from "./components/Cards";
-import getData from "./Api/api";
+import Add from "./components/Add";
+import { getData } from "./Api/api";
 
-const App = () => {
-  const set_data = async () => {
-    try {
-      const data = await getData();
-      if (data) {
-        setlist(data);
-      } else {
-        setlist([]);
-      }
-
-      console.log(`${data} from set data! `);
-      console.log("set list successfully");
-    } catch (err) {
-      console.log(err);
-    }
+class App extends React.Component {
+  state = {
+    list: [],
+    total_cost: 500,
+    money_left: 3500,
+    days_left: 11,
   };
 
-  const init_list = () => {
-    const data = getData();
+  async componentDidMount() {
+    const data = await getData();
 
-    if (data) {
-      console.log(`${data} init`);
-      return data;
-    } else {
-      return [];
-    }
+    this.setState({ list: data });
+  }
 
-    console.log(data);
-    console.log("set list successfully");
+  handle_parent_state = async () => {
+    const data = await getData();
+    this.setState({ list: data });
   };
 
-  const [list, setlist] = useState([]);
-  const [query, setquery] = useState("ee");
-  const [status, setstatus] = useState("idle");
-  const [left, setleft] = useState(500);
-  const [cost, setcost] = useState(0);
-  const [days, setdays] = useState(5);
-  const [input, setinput] = useState(0);
+  render() {
+    const { list, total_cost, money_left, days_left } = this.state;
+    const handle = this.handle_parent_state;
 
-  useEffect(() => {
-    if (!query) {
-      return;
-    }
-
-    if (query === "ee") {
-      set_data();
-      setstatus("fetched");
-    }
-    setquery("e");
-  }, [query]);
-
-  const addCost = (spend) => {
-    setcost(spend + cost);
-    setleft(left - spend);
-  };
-
-  const addClick = () => {
-    addCost(parseInt(input));
-    setinput(0);
-    setquery('er');
-  };
-
-  return (
-    <div>
-      <span className="title">
-        <h1>Money-tracker</h1>
-      </span>
-      <Cards cost={cost} left={left} days={days} />
-      <section>
-        <div className="control-bar">
-          <input
-            type="number"
-            value={input}
-            onChange={(e) => {
-              setinput(e.target.value);
-            }}
-          ></input>
-          <button onClick={addClick}>Add</button>
-        </div>{" "}
-        <div className="list-container">
-          {status === "fetched"
-            ? list.map((item, index) => {
-                return (
-                  <div key={index} className="list-item">
-                    <div className="cost">item.cost</div>
-                    <div className="category">item.category</div>
-                  </div>
-                );
-              })
-            : ""}
+    return (
+      <React.Fragment>
+        <div className="title">
+          <h1>Money - Tracker</h1>
         </div>
-      </section>
-    </div>
-  );
-};
+        <Cards cost={total_cost} left={money_left} days={days_left} />
+        <section className="main-function">
+          <div className="operation-container">
+            <Add handle={handle} />
+          </div>
+          <div className="list-container">
+            {list
+              ? list.map((item, index) => {
+                  return (
+                    <div key={index} className="item-container">
+                      <div>{item.cost}</div>
+                      <div>{item.category}</div>
+                      <div>{item.updated_time}</div>
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
+        </section>
+      </React.Fragment>
+    );
+  }
+}
 
 export default App;
