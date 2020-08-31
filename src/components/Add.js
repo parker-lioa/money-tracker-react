@@ -8,6 +8,7 @@ Modal.setAppElement("#root");
 
 const modal_style = {
   overlay: {
+    background: "rgba(0,0,0,0)",
     width: "40%",
     height: "50%",
     left: "30%",
@@ -21,7 +22,7 @@ const modal_style = {
   },
 };
 
-function Add({ handle , user }) {
+function Add({ handle, user }) {
   const [show, setShow] = useState(false);
   const [cost, setCost] = useState(0);
   const [category, setCategory] = useState("");
@@ -37,6 +38,8 @@ function Add({ handle , user }) {
     console.log("handleSubmit is called");
     event.preventDefault();
     setShow(false);
+    setCost(0);
+    setCategory("");
     postData({ user, cost, category });
     handle();
   };
@@ -51,9 +54,11 @@ function Add({ handle , user }) {
 
   return (
     <>
-      <button onClick={showModal}>Add</button>
+      <button id="add-button" onClick={showModal}>
+        Add
+      </button>
       <Modal isOpen={show} style={modal_style}>
-        <form onSubmit={handleSubmit}>
+        <form id="add-form" onSubmit={handleSubmit}>
           <label for="cost">How much :</label>
           <input
             type="text"
@@ -61,7 +66,6 @@ function Add({ handle , user }) {
             value={cost}
             onChange={handleCostInput}
           ></input>
-          <br></br>
           <label>Category :</label>
           <input
             type="text"
@@ -69,10 +73,11 @@ function Add({ handle , user }) {
             value={category}
             onChange={handleCategoryInput}
           ></input>
-          <br></br>
-          <input type="submit" value="Add"></input>
+          <input id="add-submit" type="submit" value="Add"></input>
         </form>
-        <button onClick={cancelModal}>Close</button>
+        <button id="add-close-button" onClick={cancelModal}>
+          Close
+        </button>
       </Modal>
     </>
   );
