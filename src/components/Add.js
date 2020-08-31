@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { postData } from "../Api/api";
 
+import "./Add.css";
+
 Modal.setAppElement("#root");
 
 const modal_style = {
@@ -19,7 +21,7 @@ const modal_style = {
   },
 };
 
-function Add({ handle }) {
+function Add({ handle , user }) {
   const [show, setShow] = useState(false);
   const [cost, setCost] = useState(0);
   const [category, setCategory] = useState("");
@@ -35,7 +37,7 @@ function Add({ handle }) {
     console.log("handleSubmit is called");
     event.preventDefault();
     setShow(false);
-    postData({ cost, category });
+    postData({ user, cost, category });
     handle();
   };
 

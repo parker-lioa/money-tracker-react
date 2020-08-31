@@ -4,9 +4,11 @@ import qs from "querystring";
 const cors = "https://cors-anywhere.herokuapp.com/";
 const url = "http://35.194.230.183/api";
 
-export const getData = async () => {
+
+
+export const getData = async ({Email,Name}) => {
   try {
-    const { data } = await axios.get(`${cors}${url}/records`);
+    const { data } = await axios.get(`${cors}${url}/records/${Name}`);
     console.log(data);
     return data;
   } catch (error) {

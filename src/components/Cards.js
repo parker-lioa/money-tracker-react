@@ -12,7 +12,7 @@ const Cards = ({ cost, left, days }) => {
         </div>
       </div>
       <div className="card-grid" id="left">
-        {/* 剩下的錢 */}
+        {/* 剩下的錢 */}  
         <div className="card-text">
           <h1>Left</h1>
           <h3>{left}</h3>
