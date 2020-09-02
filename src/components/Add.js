@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { postData } from "../Api/record";
-import { updateUserData} from "../Api/user";
+import { updateUserData } from "../Api/user";
 import "./Add.css";
 
 Modal.setAppElement("#root");
@@ -22,7 +22,7 @@ const modal_style = {
   },
 };
 
-function Add({ handle, email,name,total_cost,total_money }) {
+function Add({ handle, email, name, total_cost, total_money }) {
   const [show, setShow] = useState(false);
   const [cost, setCost] = useState(0);
   const [category, setCategory] = useState("");
@@ -39,9 +39,14 @@ function Add({ handle, email,name,total_cost,total_money }) {
     event.preventDefault();
     setShow(false);
     setCategory("");
-    postData({ user:name , cost:cost, category:category });
+    postData({ email: email, user: name, cost: cost, category: category });
     setCost(0);
-    updateUserData({email:email,name:name,total_cost:parseInt(total_cost)+parseInt(cost),total_money:total_money});
+    updateUserData({
+      email: email,
+      name: name,
+      total_cost: parseInt(total_cost) + parseInt(cost),
+      total_money: total_money,
+    });
     handle();
   };
 

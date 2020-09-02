@@ -49,9 +49,13 @@ class Login extends React.Component {
   };
 
   handleSignUpSubmit = async () => {
+    const { emailInput, nameInput } = this.state;
+
+    console.log(emailInput,nameInput);
+
     const { data } = await signUp({
-      email: this.emailInput,
-      name: this.nameInput,
+      email: emailInput,
+      name: nameInput,
     });
 
     console.log(data);

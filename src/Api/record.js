@@ -5,7 +5,9 @@ const url = "http://35.194.230.183/api";
 
 export const getData = async ({ Email, Name }) => {
   try {
-    const { data } = await axios.get(`${url}/records/${Name}`);
+    const { data } = await axios.get(
+      `${url}/records?email=${Email}&user=${Name}`
+    );
     console.log(data);
     return data;
   } catch (error) {
