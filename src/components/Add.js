@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { postData } from "../Api/api";
+import { postData } from "../Api/record";
 
 import "./Add.css";
 

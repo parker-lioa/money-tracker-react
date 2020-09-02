@@ -1,14 +1,11 @@
 import axios from "axios";
 import qs from "querystring";
 
-const cors = "https://cors-anywhere.herokuapp.com/";
 const url = "http://35.194.230.183/api";
 
-
-
-export const getData = async ({Email,Name}) => {
+export const getData = async ({ Email, Name }) => {
   try {
-    const { data } = await axios.get(`${cors}${url}/records/${Name}`);
+    const { data } = await axios.get(`${url}/records/${Name}`);
     console.log(data);
     return data;
   } catch (error) {
@@ -27,14 +24,13 @@ export const postData = (data) => {
   };
 
   axios
-    .post(`${cors}${url}/records`, qs.stringify(data), config)
+    .post(`${url}/records`, qs.stringify(data), config)
     .then((response) => {
       console.log(response);
     })
     .catch((err) => {
       console.log(err);
     });
-    
 };
 
 export default { getData, postData };

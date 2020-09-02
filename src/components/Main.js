@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import "./Main.css";
 import Cards from "./Cards";
 import Add from "./Add";
-import { getData } from "../Api/api";
+import { getData } from "../Api/record";
+import { getUserData } from "../Api/user";
 import queryString from "query-string";
 
 class Main extends React.Component {
-  
-
-  constructor(prop){
+  constructor(prop) {
     super(prop);
-    this.Name= queryString.parse(prop.location.search).Name;
-    this.Email= queryString.parse(prop.location.search).Email;
+    this.Name = queryString.parse(prop.location.search).Name;
+    this.Email = queryString.parse(prop.location.search).Email;
   }
-  
 
   state = {
     list: [],
@@ -23,13 +21,15 @@ class Main extends React.Component {
   };
 
   async componentDidMount() {
-    const data = await getData({Email:this.Email,Name:this.Name});
-
+    const data = await getData({ Email: this.Email, Name: this.Name });
+    console.log(this.Email, this.Name);
+    const user_data = await getUserData({ email: this.Email, name: this.Name });
+    console.log(`it is ${user_data}`);
     this.setState({ list: data });
   }
 
   handle_parent_state = async () => {
-    const data = await getData({Email:this.Email,Name:this.Name});
+    const data = await getData({ Email: this.Email, Name: this.Name });
     this.setState({ list: data });
   };
 
@@ -55,7 +55,7 @@ class Main extends React.Component {
                     <div key={index} className="item-container">
                       <div>{item.cost}</div>
                       <div>{item.category}</div>
-                      <div>{item.updated_time.slice(0,10)}</div>
+                      <div>{item.updated_time.slice(0, 10)}</div>
                     </div>
                   );
                 })
