@@ -24,7 +24,7 @@ export const postData = (data) => {
   };
 
   axios
-    .post(`${url}/records`, qs.stringify(data), config)
+    .post(`${url}/records/`, qs.stringify(data), config)
     .then((response) => {
       console.log(response);
     })

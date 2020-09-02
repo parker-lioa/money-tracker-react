@@ -15,6 +15,14 @@ export const getUserData = async ({ email, name }) => {
   }
 };
 
+// update user data
+
+export const updateUserData = (data)=>{
+  console.log(data);
+  const {email,name,total_cost,total_money} = data;
+  axios.post(`${url}/update?email=${email}&name=${name}&total_cost=${total_cost}&total_money=${total_money}`);
+}
+
 // sign in
 
 export const signIn = (data) => {

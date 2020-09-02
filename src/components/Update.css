@@ -1,0 +1,36 @@
+#update-button {
+    background: #4a69bd;
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 500;
+    border: 0;
+    border-radius: 5px;
+    width: 110px;
+    height: 55px;
+    outline: none;
+    margin-left: 20px;
+  }
+  
+  #update-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  #update-form label {
+    margin: 0;
+    padding: 5px;
+  }
+  
+  #update-submit {
+    margin-top: 20px;
+  }
+  
+  #update-close-button {
+    background: #3c6382;
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 5px;
+  }

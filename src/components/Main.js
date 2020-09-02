@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Main.css";
 import Cards from "./Cards";
 import Add from "./Add";
+import Update from "./Update";
 import { getData } from "../Api/record";
-import { getUserData } from "../Api/user";
+import { getUserData , updateUserData } from "../Api/user";
 import queryString from "query-string";
 
 class Main extends React.Component {
@@ -15,29 +16,43 @@ class Main extends React.Component {
 
   state = {
     list: [],
-    total_cost: 500,
-    money_left: 3500,
-    days_left: 11,
+    total_cost: 0,
+    total_money:0,
+    money_left:0,
+    days_left:0,
   };
+
+  
+
+  updateTotal_money = async(target)=>{
+    const {total_cost} = this.state;
+    updateUserData({email:this.Email,name:this.name,total_cost:total_cost,total_money:target});
+    const user_data = await getUserData({ email: this.Email, name: this.Name });
+    this.setState({total_cost:user_data.total_cost,total_money:user_data.total_money,money_left:user_data.total_money-user_data.total_cost,days_left:user_data.days_left});
+
+  }
 
   async componentDidMount() {
     const data = await getData({ Email: this.Email, Name: this.Name });
     console.log(this.Email, this.Name);
     const user_data = await getUserData({ email: this.Email, name: this.Name });
-    console.log(`it is ${user_data}`);
     this.setState({ list: data });
+    this.setState({total_cost:user_data.total_cost,total_money:user_data.total_money,money_left:user_data.total_money-user_data.total_cost,days_left:user_data.days_left});
   }
 
   handle_parent_state = async () => {
     const data = await getData({ Email: this.Email, Name: this.Name });
+    const user_data = await getUserData({ email: this.Email, name: this.Name });
     this.setState({ list: data });
+    this.setState({total_cost:user_data.total_cost,total_money:user_data.total_money,money_left:user_data.total_money-user_data.total_cost,days_left:user_data.days_left});
   };
 
   render() {
-    const { list, total_cost, money_left, days_left } = this.state;
+    const { list, total_cost, total_money,money_left, days_left } = this.state;
     const handle = this.handle_parent_state;
+    const handleUpdate = this.updateTotal_money;
     const name = this.Name;
-
+    const email = this.Email;
     return (
       <React.Fragment>
         <div className="title">
@@ -46,7 +61,8 @@ class Main extends React.Component {
         <Cards cost={total_cost} left={money_left} days={days_left} />
         <section className="main-function">
           <div className="operation-container">
-            <Add handle={handle} user={name} />
+            <Add handle={handle} email={email} name={name} total_cost={total_cost} total_money={total_money} />
+            <Update handle={handleUpdate}/>
           </div>
           <div className="list-container">
             {list

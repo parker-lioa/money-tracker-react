@@ -22,7 +22,7 @@ const Cards = ({ cost, left, days }) => {
         {/* 還要撐幾天 */}
         <div className="card-text">
           <h1>Days left</h1>
-          <h3>{days}</h3>
+          <h3>{days}</h3> 
         </div>
       </div>
     </div>
