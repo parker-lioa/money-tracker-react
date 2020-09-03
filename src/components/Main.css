@@ -35,3 +35,8 @@
   border: 0;
   border-radius: 10px;
 }
+
+#delete-button{
+  border:0;
+  background: none;
+}

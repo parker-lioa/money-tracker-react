@@ -8,6 +8,7 @@ class Login extends React.Component {
   state = {
     emailInput: "",
     nameInput: "",
+    id: "",
     isLoggedIn: false,
     SignUpSuccess: false,
     noneRegisterError: false,
@@ -30,6 +31,7 @@ class Login extends React.Component {
     // console.log(data);
 
     if (data.success) {
+      this.setState({ id: data.id });
       this.setState({ isLoggedIn: true });
     } else if (data.message === "wrong name!") {
       this.setState({
@@ -51,7 +53,7 @@ class Login extends React.Component {
   handleSignUpSubmit = async () => {
     const { emailInput, nameInput } = this.state;
 
-    console.log(emailInput,nameInput);
+    console.log(emailInput, nameInput);
 
     const { data } = await signUp({
       email: emailInput,
@@ -80,6 +82,7 @@ class Login extends React.Component {
     const {
       emailInput,
       nameInput,
+      id,
       isLoggedIn,
       noneRegisterError,
       nameError,
@@ -120,7 +123,7 @@ class Login extends React.Component {
                 Sign Up
               </button>
               {isLoggedIn ? (
-                <Redirect to={`/app/?Email=${emailInput}&Name=${nameInput}`} />
+                <Redirect to={`/app/?id=${id}`} />
               ) : null}
             </div>
           </div>

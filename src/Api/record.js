@@ -3,11 +3,9 @@ import qs from "querystring";
 
 const url = "http://35.194.230.183/api";
 
-export const getData = async ({ Email, Name }) => {
+export const getData = async ({ id }) => {
   try {
-    const { data } = await axios.get(
-      `${url}/records?email=${Email}&user=${Name}`
-    );
+    const { data } = await axios.get(`${url}/records?id=${id}`);
     console.log(data);
     return data;
   } catch (error) {
@@ -33,6 +31,16 @@ export const postData = (data) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const deleteData = ({ id }) => {
+  console.log(id);
+  const response = axios
+    .delete(`${url}/records/update/${id}`)
+    .then((response) => {
+      return response;
+    });
+  return response;
 };
 
 export default { getData, postData };

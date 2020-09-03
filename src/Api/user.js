@@ -1,14 +1,11 @@
 import axios from "axios";
 
 const url = "http://35.194.230.183/api/accout";
-
 // fecth user data
 
-export const getUserData = async ({ email, name }) => {
+export const getUserData = async ({ id }) => {
   try {
-    console.log(email, name);
-    const { data } = await axios.get(`${url}?email=${email}&name=${name}`);
-    console.log(data);
+    const { data } = await axios.get(`${url}?id=${id}`);
     return data;
   } catch (err) {
     console.log(err);
@@ -17,11 +14,12 @@ export const getUserData = async ({ email, name }) => {
 
 // update user data
 
-export const updateUserData = (data)=>{
-  console.log(data);
-  const {email,name,total_cost,total_money} = data;
-  axios.post(`${url}/update?email=${email}&name=${name}&total_cost=${total_cost}&total_money=${total_money}`);
-}
+export const updateUserData = (data) => {
+  const { id, total_cost, total_money } = data;
+  axios.post(
+    `${url}/update?id=${id}&total_cost=${total_cost}&total_money=${total_money}`
+  );
+};
 
 // sign in
 

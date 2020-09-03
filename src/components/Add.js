@@ -22,7 +22,7 @@ const modal_style = {
   },
 };
 
-function Add({ handle, email, name, total_cost, total_money }) {
+function Add({ handle, id, total_cost, total_money }) {
   const [show, setShow] = useState(false);
   const [cost, setCost] = useState(0);
   const [category, setCategory] = useState("");
@@ -37,13 +37,13 @@ function Add({ handle, email, name, total_cost, total_money }) {
   const handleSubmit = (event) => {
     console.log("handleSubmit is called");
     event.preventDefault();
+    // event.stopPropagation();
     setShow(false);
     setCategory("");
-    postData({ email: email, user: name, cost: cost, category: category });
+    postData({ id: id, cost: cost, category: category });
     setCost(0);
     updateUserData({
-      email: email,
-      name: name,
+      id: id,
       total_cost: parseInt(total_cost) + parseInt(cost),
       total_money: total_money,
     });
