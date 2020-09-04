@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://35.194.230.183/api/accout";
+const url = "http://localhost:8000/api/accout";
 // fecth user data
 
 export const getUserData = async ({ id }) => {
