@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8000/api/accout";
+const url = "https://www.parkerliao.me/api/accout";
 // fecth user data
 
 export const getUserData = async ({ id }) => {

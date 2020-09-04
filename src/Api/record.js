@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from "querystring";
 
-const url = "http://localhost:8000/api";
+const url = "https://www.parkerliao.me/api";
 
 export const getData = async ({ id }) => {
   try {
